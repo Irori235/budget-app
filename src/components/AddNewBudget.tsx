@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Budget, Category, Item } from "../types/budget";
 import Input from "./foundation/Input/Input";
+import Button from "./foundation/Button/Button";
 
 interface AddNewBudgetProps {
   budget: Budget | null;
@@ -21,15 +22,18 @@ const AddNewBudget: React.FC<AddNewBudgetProps> = ({
   };
 
   return (
-    <>
-      <Input
-        type="number"
-        value={monthBudget}
-        onChange={(e) => setMonthBudget(Number(e.target.value))}
-      />
+    <div className="flex flex-col">
+      <p className="px-4 py-2">Add New Budget</p>
+      <div className="flex flex-row gap-4">
+        <Input
+          type="number"
+          value={monthBudget}
+          onChange={(e) => setMonthBudget(Number(e.target.value))}
+        />
 
-      <button onClick={onClickAdd}>追加</button>
-    </>
+        <Button onClick={onClickAdd}>Add</Button>
+      </div>
+    </div>
   );
 };
 

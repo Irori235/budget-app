@@ -39,7 +39,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
   };
 
   if (!budget) {
-    return <p>No budget data for the selected month.</p>;
+    return null;
   }
 
   return (

@@ -48,7 +48,7 @@ const BudgetPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="container mx-auto  px-4 py-12 flex flex-col items-center space-y-4">
       <Button onClick={handleLogout}>Logout</Button>
 
       <SelectMonth
@@ -62,9 +62,14 @@ const BudgetPage: React.FC = () => {
       <li>Year: {selectedYear}</li>
       <li>Month: {selectedMonth}</li>
       <li>Month Budget: {selectedBudget?.monthBudget}</li>
-      <AddNewBudget budget={selectedBudget} onAddBudget={onAddBudget} />
+
+      {selectedBudget ? (
+        <BudgetTable budget={selectedBudget} onUpdateBudget={onUpdateBudget} />
+      ) : (
+        <AddNewBudget budget={selectedBudget} onAddBudget={onAddBudget} />
+      )}
+
       <AddItemForm budget={selectedBudget} onUpdateBudget={onUpdateBudget} />
-      <BudgetTable budget={selectedBudget} onUpdateBudget={onUpdateBudget} />
     </div>
   );
 };

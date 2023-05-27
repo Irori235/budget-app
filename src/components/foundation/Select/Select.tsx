@@ -33,7 +33,7 @@ const Select: React.FC<SelectProps> = ({ options, selected, setSelected }) => {
           {options.map((option, index) => (
             <Listbox.Option key={index} value={option}>
               {({ active, selected }) => (
-                <li
+                <div
                   className={`${
                     active ? "text-white bg-blue-600" : "text-gray-900"
                   } cursor-default select-none relative py-2 pl-3 pr-9`}
@@ -66,7 +66,7 @@ const Select: React.FC<SelectProps> = ({ options, selected, setSelected }) => {
                       </svg>
                     </span>
                   )}
-                </li>
+                </div>
               )}
             </Listbox.Option>
           ))}
