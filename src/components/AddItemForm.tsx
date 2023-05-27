@@ -48,6 +48,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
       setItemName("");
       setCost(0);
       onUpdateBudget(newBudget);
+      setIsFormVisible(false);
     }
   };
 
@@ -56,55 +57,37 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
       <Button onClick={() => setIsFormVisible(!isFormVisible)}>
         {isFormVisible ? "x" : "o"}
       </Button>
-      <Transition
-        show={isFormVisible}
-        enter="transition ease-out duration-300 transform"
-        enterFrom="translate-y-full"
-        enterTo="translate-y-0"
-        leave="transition ease-in duration-200 transform"
-        leaveFrom="translate-y-0"
-        leaveTo="translate-y-full"
-      >
-        <div className="w-full max-w-md mx-auto mt-4 relative">
-          <button
-            onClick={() => setIsFormVisible(false)}
-            className="absolute top-0 right-0 mt-2 mr-2 text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            X
-          </button>
-          <div className="flex flex-row gap-4">
-            <Input
-              type="text"
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-            />
-            <Input
-              type="text"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-            />
-            <Input
-              type="number"
-              value={cost}
-              onChange={(e) => setCost(Number(e.target.value))}
-            />
-            <Button onClick={onClickAdd}>
-              Add
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v12m6-6H6"
+      <Transition show={isFormVisible}>
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
+          <div className="bg-black bg-opacity-50 w-full h-full absolute"></div>
+          <div className=" bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
+            <div className="flex justify-end items-center">
+              <button onClick={() => setIsFormVisible(false)}>X</button>
+            </div>
+            <div className="flex flex-col gap-4 p-4">
+              <label className="flex justify-between">
+                <span>Category</span>
+                <Input
+                  value={categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
                 />
-              </svg>
-            </Button>
+              </label>
+              <label className="flex justify-between">
+                <span>Name</span>
+                <Input
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                />
+              </label>
+              <label className="flex justify-between">
+                <span>Cost</span>
+                <Input
+                  value={cost}
+                  onChange={(e) => setCost(Number(e.target.value))}
+                />
+              </label>
+              <Button onClick={onClickAdd}>Add</Button>
+            </div>
           </div>
         </div>
       </Transition>

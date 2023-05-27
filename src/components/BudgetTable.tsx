@@ -9,7 +9,7 @@ interface BudgetTableProps {
 
 const BudgetTable: React.FC<BudgetTableProps> = ({
   budget,
-  onUpdateBudget: onDeleteItems,
+  onUpdateBudget,
 }) => {
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
 
@@ -33,7 +33,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
         }),
       };
 
-      onDeleteItems(newBudget);
+      onUpdateBudget(newBudget);
       setSelectedItems([]);
     }
   };
@@ -44,24 +44,26 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
 
   return (
     <>
-      <button
-        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
-        onClick={onClickDelete}
-      >
-        削除
-      </button>
+      <div className="flex justify-end">
+        <button
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none"
+          onClick={onClickDelete}
+        >
+          Delete
+        </button>
+      </div>
 
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-200 mt-4">
         <thead className="bg-gray-50">
           <tr>
-            <th className="px-6 py-3"></th>
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="w-1/12 px-6 py-3"> </th>
+            <th className="w-3/12 px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
               category
             </th>
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              item
+            <th className="w-4/12 px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              name
             </th>
-            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="w-4/12 px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
               cost
             </th>
           </tr>
@@ -71,7 +73,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
             <React.Fragment key={category.name}>
               {category.items.map((item) => (
                 <tr key={item.name}>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="w-1/12 px-6 py-4 whitespace-nowrap">
                     <input
                       className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       type="checkbox"
@@ -81,14 +83,14 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
                   </td>
                   {item.name === category.items[0].name ? (
                     <td
-                      className="px-6 py-4 whitespace-nowrap"
+                      className="w-3/12 px-6 py-4"
                       rowSpan={category.items.length}
                     >
                       {category.name}
                     </td>
                   ) : null}
-                  <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{item.cost}</td>
+                  <td className="w-4/12 px-6 py-4">{item.name}</td>
+                  <td className="w-4/12 px-6 py-4">{item.cost}</td>
                 </tr>
               ))}
             </React.Fragment>

@@ -26,7 +26,6 @@ const AddNewBudget: React.FC<AddNewBudgetProps> = ({
       <p className="px-4 py-2">Add New Budget</p>
       <div className="flex flex-row gap-4">
         <Input
-          type="number"
           value={monthBudget}
           onChange={(e) => setMonthBudget(Number(e.target.value))}
         />

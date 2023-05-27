@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, PureComponent } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../services/firebase";
 import AddItemForm from "../components/AddItemForm";
@@ -8,6 +8,8 @@ import SelectMonth from "../components/SelectMonth";
 import { useBudgets } from "../hooks/useBudgets";
 import { Budget, Category, Item } from "../types/budget";
 import Button from "../components/foundation/Button/Button";
+
+import { PureComponent as ExitIcon } from "react";
 
 const BudgetPage: React.FC = () => {
   const [user, loading] = useAuthState(auth);
@@ -49,19 +51,17 @@ const BudgetPage: React.FC = () => {
 
   return (
     <div className="container mx-auto  px-4 py-12 flex flex-col items-center space-y-4">
-      <Button onClick={handleLogout}>Logout</Button>
+      <div className="flex flex-row gap-4">
+        <SelectMonth
+          selectedYear={selectedYear}
+          selectedMonth={selectedMonth}
+          onSelectYear={setSelectedYear}
+          onSelectMonth={setSelectedMonth}
+        />
+        <p className="px-4 py-2">{selectedBudget?.monthBudget} 円</p>
 
-      <SelectMonth
-        selectedYear={selectedYear}
-        selectedMonth={selectedMonth}
-        onSelectYear={setSelectedYear}
-        onSelectMonth={setSelectedMonth}
-      />
-
-      <li>UID: {user?.uid}</li>
-      <li>Year: {selectedYear}</li>
-      <li>Month: {selectedMonth}</li>
-      <li>Month Budget: {selectedBudget?.monthBudget}</li>
+        <Button onClick={handleLogout}>Exit</Button>
+      </div>
 
       {selectedBudget ? (
         <BudgetTable budget={selectedBudget} onUpdateBudget={onUpdateBudget} />
