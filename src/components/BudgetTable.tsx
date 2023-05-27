@@ -44,33 +44,51 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
 
   return (
     <>
-      <button onClick={onClickDelete}>削除</button>
+      <button
+        className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none"
+        onClick={onClickDelete}
+      >
+        削除
+      </button>
 
-      <table>
-        <thead>
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
           <tr>
-            <th>category</th>
-            <th>item</th>
-            <th>amount</th>
+            <th className="px-6 py-3"></th>
+            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              category
+            </th>
+            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              item
+            </th>
+            <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+              cost
+            </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-white divide-y divide-gray-200">
           {budget.categories.map((category) => (
             <React.Fragment key={category.name}>
               {category.items.map((item) => (
                 <tr key={item.name}>
-                  <td>
+                  <td className="px-6 py-4 whitespace-nowrap">
                     <input
+                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                       type="checkbox"
                       checked={selectedItems.includes(item)}
                       onChange={(e) => handleSelectItem(item, e.target.checked)}
                     />
                   </td>
                   {item.name === category.items[0].name ? (
-                    <td rowSpan={category.items.length}>{category.name}</td>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap"
+                      rowSpan={category.items.length}
+                    >
+                      {category.name}
+                    </td>
                   ) : null}
-                  <td>{item.name}</td>
-                  <td>{item.cost}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{item.cost}</td>
                 </tr>
               ))}
             </React.Fragment>
