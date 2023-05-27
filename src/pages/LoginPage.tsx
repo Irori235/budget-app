@@ -24,10 +24,15 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>ログイン</h1>
-      <button onClick={handleLogin}>Sign in with Google</button>
-      <SignInButton onClick={handleLogin} />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="container mx-auto px-4 py-12 flex flex-col items-center space-y-4 gap-4">
+        <h1 className="text-4xl ">Budget App</h1>
+
+        <div className="flex flex-col items-center space-y-2">
+          <SignInButton onClick={handleLogin} />
+          <p className="text-xs">ログインして始める</p>
+        </div>
+      </div>
     </div>
   );
 };

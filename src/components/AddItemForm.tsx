@@ -53,16 +53,14 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <Button onClick={() => setIsFormVisible(!isFormVisible)}>
-        {isFormVisible ? "x" : "o"}
-      </Button>
+    <div className="flex flex-col items-center justify-center ">
+      <Button onClick={() => setIsFormVisible(!isFormVisible)}>＋</Button>
       <Transition show={isFormVisible}>
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="bg-black bg-opacity-50 w-full h-full absolute"></div>
-          <div className=" bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
+          <div className=" bg-white w-2/3 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
             <div className="flex justify-end items-center">
-              <button onClick={() => setIsFormVisible(false)}>X</button>
+              <button onClick={() => setIsFormVisible(false)}>x</button>
             </div>
             <div className="flex flex-col gap-4 p-4">
               <label className="flex justify-between">
