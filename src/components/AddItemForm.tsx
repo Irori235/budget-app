@@ -54,13 +54,30 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center ">
-      <Button onClick={() => setIsFormVisible(!isFormVisible)}>＋</Button>
+      <Button onClick={() => setIsFormVisible(!isFormVisible)}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-4 h-4"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </Button>
       <Transition show={isFormVisible}>
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="bg-black bg-opacity-50 w-full h-full absolute"></div>
           <div className=" bg-white w-2/3 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
             <div className="flex justify-end items-center">
-              <button onClick={() => setIsFormVisible(false)}>x</button>
+              <button className="w-6" onClick={() => setIsFormVisible(false)}>
+                x
+              </button>
             </div>
             <div className="flex flex-col gap-4 p-4">
               <label className="flex justify-between">
