@@ -2,19 +2,21 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../services/firebase";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import SignInButton from "../components/foundation/SignInButton/SignInButton";
+import {
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import {
+  GoogleSignInButton,
+  GithubSignInButton,
+} from "../components/foundation/SignInButton/SignInButton";
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
 
-  // ユーザーがログイン済みの場合、予算ページにリダイレクト
-  if (user) {
-    navigate("/budget");
-  }
-
-  const handleLogin = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
@@ -23,14 +25,33 @@ const LoginPage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="container mx-auto px-4 py-12 flex flex-col items-center space-y-4 gap-4">
-        <h1 className="text-4xl ">Budget App</h1>
+  const handleGithubLogin = async () => {
+    try {
+      console.log("handleGithubLogin");
+      const provider = new GithubAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-        <div className="flex flex-col items-center space-y-2">
-          <SignInButton onClick={handleLogin} />
-          <p className="text-xs">ログインして始める</p>
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="container mx-auto px-4 py-12 max-w-sm flex flex-col items-center space-y-4 gap-4 bg-white rounded-lg shadow-xl">
+        <div className="flex flex-col items-center py-6 space-y-4">
+          <h1 className="text-6xl font-serif font-light text-gray-900">
+            Cashly
+          </h1>
+          <p className="text-sm font-serif text-gray-600">
+            家計管理をより簡単に、より楽しく
+          </p>
+        </div>
+
+        <div className="flex flex-col items-center space-y-4">
+          <hr className="w-full" />
+          <p className="text-sm font-serif text-gray-600">ログインして始める</p>
+          <GoogleSignInButton onClick={handleGoogleLogin} />
+          <GithubSignInButton onClick={handleGithubLogin} />
         </div>
       </div>
     </div>
