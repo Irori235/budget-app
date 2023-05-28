@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react-swc";
 export default {
   build: {
     rollupOptions: {
-      input: "src/index.tsx", // ここで正しいエントリーポイントを指定
+      input: "./index.html", // ここで正しいエントリーポイントを指定
     },
   },
 };

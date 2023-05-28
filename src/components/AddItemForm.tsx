@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Budget, Category, Item } from "../types/budget";
 import Input from "./foundation/Input/Input";
 import Button from "./foundation/Button/Button";
+import Toast from "./foundation/Toast/Toast";
 import { Transition } from "@headlessui/react";
 
 interface AddItemFormProps {
@@ -17,6 +18,15 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
   const [categoryName, setCategoryName] = useState<string>("");
   const [itemName, setItemName] = useState<string>("");
   const [cost, setCost] = useState<number>(0);
+  const [showToast, setShowToast] = useState<boolean>(false);
+
+  const triggerToast = () => {
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   const onClickAdd = () => {
     if (budget) {
@@ -24,6 +34,15 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
         name: itemName,
         cost: cost,
       };
+
+      const category = budget.categories.find(
+        (category) => category.name === categoryName
+      );
+
+      if (category && category.items.some((item) => item.name === itemName)) {
+        triggerToast();
+        return;
+      }
 
       const newCategories = budget.categories.map((category) =>
         category.name === categoryName
@@ -70,7 +89,16 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
           />
         </svg>
       </Button>
-      <Transition show={isFormVisible}>
+
+      <Transition
+        show={isFormVisible}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
           <div className="bg-black bg-opacity-50 w-full h-full absolute"></div>
           <div className=" bg-white w-2/3 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
@@ -79,6 +107,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
                 x
               </button>
             </div>
+            <Toast show={showToast} message="already exists" type="error" />
             <div className="flex flex-col gap-4 p-4">
               <label className="flex justify-between">
                 <span>Category</span>
@@ -101,7 +130,9 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
                   onChange={(e) => setCost(Number(e.target.value))}
                 />
               </label>
-              <Button onClick={onClickAdd}>Add</Button>
+              <Button onClick={onClickAdd} color="black">
+                Add
+              </Button>
             </div>
           </div>
         </div>

@@ -3,12 +3,24 @@ import React, { ReactNode } from "react";
 interface ButtonProps {
   onClick: () => void;
   children: ReactNode;
+  color?: "black" | "red" | "white";
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  children,
+  color = "white",
+}) => {
+  const bgColor =
+    color === "black"
+      ? "bg-gray-600 hover:bg-gray-500 text-white"
+      : color === "red"
+      ? "bg-red-400 hover:bg-red-500 text-white"
+      : "bg-white hover:bg-gray-200 border-black text-black";
+
   return (
     <button
-      className="px-3 py-3 bg-blue-600 text-white rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className={`px-3 py-3 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 ${bgColor}`}
       onClick={onClick}
     >
       {children}
