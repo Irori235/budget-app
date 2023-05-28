@@ -56,14 +56,18 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
                   </td>
                   {item.name === category.items[0].name ? (
                     <td
-                      className="w-3/12 px-6 py-4"
+                      className="w-3/12 px-6 py-4 font-light text-center"
                       rowSpan={category.items.length}
                     >
                       {category.name}
                     </td>
                   ) : null}
-                  <td className="w-4/12 px-6 py-4">{item.name}</td>
-                  <td className="w-4/12 px-6 py-4">{item.cost}</td>
+                  <td className="w-4/12 px-6 py-4 font-light text-center">
+                    {item.name}
+                  </td>
+                  <td className="w-4/12 px-6 py-4 font-light text-center">
+                    {item.cost}
+                  </td>
                 </tr>
               ))}
             </React.Fragment>
@@ -78,7 +82,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
               {" "}
             </td>
             <td
-              className={`w-4/12 px-6 py-3  font-medium uppercase tracking-wider ${color}`}
+              className={`w-4/12 px-6 py-3 font-light  uppercase tracking-wider ${color} text-center`}
             >
               {symbol} {Math.abs(diff)}
             </td>

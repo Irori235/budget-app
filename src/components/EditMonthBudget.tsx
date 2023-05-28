@@ -65,7 +65,7 @@ const EditMonthBudget: React.FC<EditMonthBudgetProps> = ({
           </>
         ) : (
           <>
-            <p className="px-4 py-2 w-24">{monthBudget}</p>
+            <p className="px-4 py-2 w-24 font-light">{monthBudget}</p>
             <Button onClick={() => setIsEditing(true)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

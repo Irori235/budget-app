@@ -1,6 +1,6 @@
 import React from "react";
 
-const Spinner: React.FC = ({}) => {
+const Spiner: React.FC = ({}) => {
   return (
     <div className="flex justify-center items-center">
       <svg
@@ -27,4 +27,4 @@ const Spinner: React.FC = ({}) => {
   );
 };
 
-export default Spinner;
+export default Spiner;
