@@ -1,5 +1,6 @@
 import React from "react";
 import { Budget, Item } from "../types/budget";
+import Checkbox from "./foundation/Checkbox/Checkbox";
 
 interface BudgetTableProps {
   budget: Budget | null;
@@ -47,9 +48,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
               {category.items.map((item) => (
                 <tr key={item.name}>
                   <td className="w-1/12 px-6 py-4 whitespace-nowrap">
-                    <input
-                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-                      type="checkbox"
+                    <Checkbox
                       checked={selectedItems.includes(item)}
                       onChange={(e) => handleSelectItem(item, e.target.checked)}
                     />
