@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const bgColor =
     color === "black"
-      ? "bg-gray-600 hover:bg-gray-500 text-white"
+      ? "bg-gray-500 hover:bg-gray-600 text-white"
       : color === "red"
       ? "bg-red-400 hover:bg-red-500 text-white"
       : "bg-white hover:bg-gray-200 border-black text-black";

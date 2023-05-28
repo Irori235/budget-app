@@ -10,6 +10,7 @@ import Button from "../components/foundation/Button/Button";
 
 import { PureComponent as ExitIcon } from "react";
 import EditMonthBudget from "../components/EditMonthBudget";
+import Spinner from "../components/foundation/Spiner/spiner";
 
 const BudgetPage: React.FC = () => {
   const [user, loading] = useAuthState(auth);
@@ -150,7 +151,7 @@ const BudgetPage: React.FC = () => {
       </div>
 
       {loading ? (
-        <p>loading...</p>
+        <Spinner />
       ) : budget ? (
         <BudgetTable
           budget={budget}
