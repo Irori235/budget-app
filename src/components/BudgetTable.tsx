@@ -21,7 +21,7 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
     .reduce((sum, item) => sum + item.cost, 0);
 
   const diff = budget.monthBudget - totalCost;
-  const symbol = diff >= 0 ? "△" : "▽";
+  const symbol = diff >= 0 ? "▲" : "▼";
   const color = diff >= 0 ? "text-green-500" : "text-pink-500";
 
   return (
@@ -76,13 +76,8 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
         <tfoot className="bg-white">
           <tr>
             <td
-              colSpan={3}
-              className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              {" "}
-            </td>
-            <td
-              className={`w-4/12 px-6 py-3 font-light  uppercase tracking-wider ${color} text-center`}
+              colSpan={4}
+              className={`w-4/12 px-6 py-3 font-light  uppercase tracking-wider ${color} text-right`}
             >
               {symbol} {Math.abs(diff)}
             </td>

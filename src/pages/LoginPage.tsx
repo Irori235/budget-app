@@ -36,8 +36,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 py-12 max-w-sm flex flex-col items-center space-y-4 gap-4 bg-white rounded-lg shadow-xl">
+    <div className="flex items-center justify-center min-h-screen bg-white sm:bg-gray-100 ">
+      <div className="container mx-auto px-4 py-8 max-w-sm flex flex-col items-center space-y-4 gap-4 bg-white rounded-lg sm:shadow-xl">
         <div className="flex flex-col items-center py-6 space-y-4">
           <h1 className="text-6xl font-serif font-light text-gray-900">
             Cashly
@@ -47,7 +47,7 @@ const LoginPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center pb-8 space-y-4">
           <hr className="w-full" />
           <p className="text-sm font-serif text-gray-600">ログインして始める</p>
           <GoogleSignInButton onClick={handleGoogleLogin} />
