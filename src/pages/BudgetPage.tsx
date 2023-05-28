@@ -3,7 +3,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../services/firebase";
 import AddItemForm from "../components/AddItemForm";
 import BudgetTable from "../components/BudgetTable";
-import AddNewBudget from "../components/AddNewBudget";
 import SelectMonth from "../components/SelectMonth";
 import { useBudgets } from "../hooks/useBudgets";
 import { Budget, Category, Item } from "../types/budget";
@@ -156,7 +155,7 @@ const BudgetPage: React.FC = () => {
           handleSelectItem={handleSelectItem}
         />
       ) : (
-        <AddNewBudget budget={budget} onAddBudget={onAddBudget} />
+        <></>
       )}
     </div>
   );
