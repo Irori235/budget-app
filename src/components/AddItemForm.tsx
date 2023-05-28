@@ -17,7 +17,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [categoryName, setCategoryName] = useState<string>("");
   const [itemName, setItemName] = useState<string>("");
-  const [cost, setCost] = useState<number>(0);
+  const [cost, setCost] = useState<number | string>(0);
   const [showToast, setShowToast] = useState<boolean>(false);
 
   const triggerToast = () => {
@@ -30,9 +30,14 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
 
   const onClickAdd = () => {
     if (budget) {
+      if (isNaN(Number(cost))) {
+        triggerToast();
+        return;
+      }
+
       const newItem: Item = {
         name: itemName,
-        cost: cost,
+        cost: Number(cost),
       };
 
       const category = budget.categories.find(
@@ -125,10 +130,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
               </label>
               <label className="flex justify-between">
                 <span>Cost</span>
-                <Input
-                  value={cost}
-                  onChange={(e) => setCost(Number(e.target.value))}
-                />
+                <Input value={cost} onChange={(e) => setCost(e.target.value)} />
               </label>
               <Button onClick={onClickAdd} color="black">
                 Add

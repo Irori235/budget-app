@@ -1,8 +1,5 @@
 import React from "react";
 import { Budget, Item } from "../types/budget";
-import { useState } from "react";
-
-import AddItemForm from "./AddItemForm";
 
 interface BudgetTableProps {
   budget: Budget | null;
@@ -18,6 +15,14 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
   if (!budget) {
     return null;
   }
+
+  const totalCost = budget.categories
+    .flatMap((category) => category.items)
+    .reduce((sum, item) => sum + item.cost, 0);
+
+  const diff = budget.monthBudget - totalCost;
+  const symbol = diff >= 0 ? "△" : "▽";
+  const color = diff >= 0 ? "text-green-500" : "text-pink-500";
 
   return (
     <>
@@ -64,6 +69,21 @@ const BudgetTable: React.FC<BudgetTableProps> = ({
             </React.Fragment>
           ))}
         </tbody>
+        <tfoot className="bg-white">
+          <tr>
+            <td
+              colSpan={3}
+              className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              {" "}
+            </td>
+            <td
+              className={`w-4/12 px-6 py-3  font-medium uppercase tracking-wider ${color}`}
+            >
+              {symbol} {Math.abs(diff)}
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </>
   );

@@ -1,6 +1,7 @@
 import Button from "./foundation/Button/Button";
 import Input from "./foundation/Input/Input";
 import React, { useState } from "react";
+import Toast from "./foundation/Toast/Toast";
 
 interface EditMonthBudgetProps {
   monthBudget: number;
@@ -12,22 +13,38 @@ const EditMonthBudget: React.FC<EditMonthBudgetProps> = ({
   onEditMonthBudget,
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [newMonthBudget, setNewMonthBudget] = useState<number>(monthBudget);
+  const [newMonthBudget, setNewMonthBudget] = useState<number | string>(
+    monthBudget
+  );
+  const [showToast, setShowToast] = useState<boolean>(false);
+
+  const triggerToast = () => {
+    setShowToast(true);
+
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000);
+  };
 
   const onClickEdit = () => {
-    onEditMonthBudget(newMonthBudget);
+    if (isNaN(Number(newMonthBudget))) {
+      triggerToast();
+      return;
+    }
+    onEditMonthBudget(Number(newMonthBudget));
     setIsEditing(false);
   };
 
   return (
     <div className="flex flex-col">
+      <Toast show={showToast} message="not number" type="error" />
       <div className="flex flex-row gap-4 ">
         {isEditing ? (
           <>
             <Input
               value={newMonthBudget}
               size="sm"
-              onChange={(e) => setNewMonthBudget(Number(e.target.value))}
+              onChange={(e) => setNewMonthBudget(e.target.value)}
             />
             <Button onClick={onClickEdit}>
               <svg

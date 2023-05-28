@@ -35,8 +35,11 @@ const BudgetPage: React.FC = () => {
   }, [selectedYear, selectedMonth]);
 
   const onUpdateBudget = async (budget: Budget) => {
-    console.log("onUpdateBudget");
-    await updateBudget(selectedYear, selectedMonth, budget);
+    const newBudget: Budget = {
+      ...budget,
+      categories: budget.categories.filter((c) => c.items.length > 0),
+    };
+    await updateBudget(selectedYear, selectedMonth, newBudget);
     fetchBudget();
   };
 
