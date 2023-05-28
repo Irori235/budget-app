@@ -4,13 +4,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./services/firebase";
 import LoginPage from "./pages/LoginPage";
 import BudgetPage from "./pages/BudgetPage";
-import Spinner from "./components/foundation/Spiner/spiner";
 
 const App: React.FC = () => {
   const [user, loading] = useAuthState(auth);
 
   if (loading) {
-    return null;
+    return <></>;
   }
 
   return (
