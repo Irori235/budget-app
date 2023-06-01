@@ -4,6 +4,7 @@ import Input from "./foundation/Input/Input";
 import Button from "./foundation/Button/Button";
 import Toast from "./foundation/Toast/Toast";
 import { Transition } from "@headlessui/react";
+import Modal from "./foundation/Modal/Modal";
 
 interface AddItemFormProps {
   budget: Budget | null;
@@ -95,50 +96,32 @@ const AddItemForm: React.FC<AddItemFormProps> = ({
         </svg>
       </Button>
 
-      <Transition
-        show={isFormVisible}
-        enter="transition-opacity duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-300"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
-          <div className="bg-black bg-opacity-50 w-full h-full absolute"></div>
-          <div className=" bg-white w-2/3 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto relative">
-            <div className="flex justify-end items-center">
-              <button className="w-6" onClick={() => setIsFormVisible(false)}>
-                x
-              </button>
-            </div>
-            <Toast show={showToast} message="already exists" type="error" />
-            <div className="flex flex-col gap-4 p-4">
-              <label className="flex justify-between">
-                <span>Category</span>
-                <Input
-                  value={categoryName}
-                  onChange={(e) => setCategoryName(e.target.value)}
-                />
-              </label>
-              <label className="flex justify-between">
-                <span>Name</span>
-                <Input
-                  value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
-                />
-              </label>
-              <label className="flex justify-between">
-                <span>Cost</span>
-                <Input value={cost} onChange={(e) => setCost(e.target.value)} />
-              </label>
-              <Button onClick={onClickAdd} color="black">
-                Add
-              </Button>
-            </div>
-          </div>
+      <Modal isOpen={isFormVisible} setIsOpen={setIsFormVisible}>
+        <Toast show={showToast} message="already exists" type="error" />
+        <div className="flex flex-col gap-4 p-4">
+          <label className="flex justify-between">
+            <span>Category</span>
+            <Input
+              value={categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+            />
+          </label>
+          <label className="flex justify-between">
+            <span>Name</span>
+            <Input
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            />
+          </label>
+          <label className="flex justify-between">
+            <span>Cost</span>
+            <Input value={cost} onChange={(e) => setCost(e.target.value)} />
+          </label>
+          <Button onClick={onClickAdd} color="black">
+            Add
+          </Button>
         </div>
-      </Transition>
+      </Modal>
     </div>
   );
 };
