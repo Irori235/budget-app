@@ -7,7 +7,7 @@ interface DropdownProps {
 
 const Dropdown: React.FC<DropdownProps> = ({ options }) => {
   return (
-    <div className="shadow-sm">
+    <div className="shadow-sm relative">
       <Menu>
         {({ open }) => (
           <>
@@ -28,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options }) => {
               </svg>
             </Menu.Button>
             {open && (
-              <Menu.Items className="absolute w-24 py-1 mt-1 overflow-auto text-base bg-white border border-gray-300 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              <Menu.Items className="absolute right-0 w-24 py-1 mt-1 overflow-auto text-base bg-white border border-gray-300 rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                 {options.map((option, index) => (
                   <Menu.Item key={index}>
                     {({ active }) => (
