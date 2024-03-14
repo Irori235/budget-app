@@ -1,0 +1,34 @@
+name: Build and push to ghcr
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  image:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create Tag SHA
+        id: create-tag-sha
+        run: |
+          echo ${{ github.sha }} | cut -c 1-7 | awk '{print "sha="$0}' >> $GITHUB_OUTPUT
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: irori235
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/irori235/cashly:latest
+            ghcr.io/irori235/cashly:${{ steps.create-tag-sha.outputs.sha }}
